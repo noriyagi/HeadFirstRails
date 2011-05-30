@@ -1,0 +1,11 @@
+<% remote_form_for(incident, :update=>'map_info') do |f| %>
+  <p><%= f.label :mountain %> <%= f.text_field :mountain %></p>
+  <%= f.hidden_field :latitude %>
+  <%= f.hidden_field :longitude %>
+  <p><%= f.label :when %> <%= f.datetime_select :when %></p>
+  <p><%= f.label :title %> <%= f.text_field :title %></p>
+  <p><%= f.label :description %><br/><%= f.text_area :description, :rows=>3 %></p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>

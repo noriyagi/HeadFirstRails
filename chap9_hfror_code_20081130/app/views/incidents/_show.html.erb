@@ -1,0 +1,34 @@
+<p>
+
+  <b>Mountain:</b>
+
+  <%=h incident.mountain %>
+
+</p>
+
+<p>
+
+  <b>When:</b>
+
+  <%=h incident.when %>
+
+</p>
+
+<p>
+
+  <b>Title:</b>
+
+  <%=h incident.title %>
+
+</p>
+
+<p>
+
+  <b>Description:</b>
+
+  <%=h incident.description %>
+
+</p>
+
+<p><%= link_to_remote "Edit", :update => "map_info",
+	:url=>edit_incident_url(incident), :method=>'get' %></p>

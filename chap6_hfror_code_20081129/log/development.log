@@ -1,0 +1,1175 @@
+  [4;36;1mSQL (0.000279)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000173)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.002468)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.003091)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000734)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000170)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateFlights (20081129171917)
+  [4;36;1mSQL (0.002421)[0m   [0;1mCREATE TABLE "flights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "departure" datetime, "arrival" datetime, "destination" varchar(255), "baggage_allowance" decimal, "capacity" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.001729)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081129171917')[0m
+Migrating to CreateSeats (20081129171936)
+  [4;36;1mSQL (0.001730)[0m   [0;1mCREATE TABLE "seats" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "flight_id" integer, "name" varchar(255), "baggage" decimal, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.002026)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081129171936')[0m
+  [4;36;1mSQL (0.000466)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000323)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000466)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000074)[0m   [0mPRAGMA index_list("flights")[0m
+  [4;36;1mSQL (0.000063)[0m   [0;1mPRAGMA index_list("seats")[0m
+
+
+Processing FlightsController#index (for 127.0.0.1 at 2008-11-29 17:31:05) [GET]
+  Session ID: 7517aa95ef504b1b6d7715e0574c423a
+  Parameters: {"action"=>"index", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000361)[0m   [0;1mSELECT * FROM "flights" [0m
+Rendering template within layouts/flights
+Rendering flights/index
+Completed in 0.00738 (135 reqs/sec) | Rendering: 0.00249 (33%) | DB: 0.00036 (4%) | 200 OK [http://localhost/flights]
+
+
+Processing FlightsController#index (for 127.0.0.1 at 2008-11-29 17:32:38) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--f64af16ad73ff66dffae453761899bb0f1dc61e6
+  Parameters: {"action"=>"index", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000779)[0m   [0mSELECT * FROM "flights" [0m
+Rendering template within layouts/flights
+Rendering flights/index
+Completed in 0.43805 (2 reqs/sec) | Rendering: 0.43286 (98%) | DB: 0.00078 (0%) | 200 OK [http://localhost/flights]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 17:32:57) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlOGI1OTg4OGUzN2ZhNDAxYzFhY2YzMWViOTdhYTg2
+NTMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--848cfcef79491bb479bd8934ecee5f9117e195db
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000236)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+
+
+ActionView::TemplateError (undefined local variable or method `”new_seat” ' for #<ActionView::Base:0x25e79d0>) on line #26 of flights/show.html.erb:
+23:   <%=h @flight.capacity %>
+24: </p>
+25: 
+26: <%= render :partial=>”new_seat” %>
+27: 
+28: <%= link_to 'Edit', edit_flight_path(@flight) %> |
+29: <%= link_to 'Back', flights_path %>
+
+    app/views/flights/show.html.erb:26:in `_run_erb_47app47views47flights47show46html46erb'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `execute'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:35:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:22:in `render_template'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:248:in `render_file'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1112:in `render_for_file'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:869:in `render_with_no_layout'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:884:in `render_with_no_layout'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/layout.rb:251:in `render_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:51:in `render'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:51:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:131:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:131:in `custom'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:160:in `call'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:160:in `respond'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:154:in `each'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:154:in `respond'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    app/controllers/flights_controller.rb:18:in `show'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:579:in `call_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/query_cache.rb:8:in `cache'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:76:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:74:in `synchronize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:74:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 17:33:27) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlOGI1OTg4OGUzN2ZhNDAxYzFhY2YzMWViOTdhYTg2
+NTMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--848cfcef79491bb479bd8934ecee5f9117e195db
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000244)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+
+
+ActionView::TemplateError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id) on line #3 of flights/_new_seat.html.erb:
+1: <h1>New seat</h1>
+2: 
+3: <% form_for(@seat) do |f| %>
+4:   <%= f.error_messages %>
+5: 
+6:   <p>
+
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/record_identifier.rb:76:in `dom_id'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/helpers/record_identification_helper.rb:16:in `dom_id'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/helpers/form_helper.rb:264:in `apply_form_for_options!'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/helpers/form_helper.rb:248:in `form_for'
+    app/views/flights/_new_seat.html.erb:3:in `_run_erb_47app47views47flights47_new_seat46html46erb'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `execute'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partial_template.rb:20:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:26:in `benchmark'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:26:in `benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partial_template.rb:19:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:22:in `render_template'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partials.rb:110:in `render_partial'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:277:in `render'
+    app/views/flights/show.html.erb:26:in `_run_erb_47app47views47flights47show46html46erb'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `execute'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:35:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:22:in `render_template'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:248:in `render_file'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1112:in `render_for_file'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:869:in `render_with_no_layout'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:884:in `render_with_no_layout'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/layout.rb:251:in `render_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:51:in `render'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:51:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:131:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:131:in `custom'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:160:in `call'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:160:in `respond'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:154:in `each'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:154:in `respond'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    app/controllers/flights_controller.rb:18:in `show'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:579:in `call_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/query_cache.rb:8:in `cache'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:76:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:74:in `synchronize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:74:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2008-11-29 17:35:25) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlOGI1OTg4OGUzN2ZhNDAxYzFhY2YzMWViOTdhYTg2
+NTMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--848cfcef79491bb479bd8934ecee5f9117e195db
+  Parameters: {}
+
+
+ActionController::RoutingError (No route matches "/incidents/news.xml" with {:method=>:get}):
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/routing/recognition_optimisation.rb:67:in `recognize_path'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/routing/route_set.rb:385:in `recognize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:148:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (not_found)
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 17:41:35) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlOGI1OTg4OGUzN2ZhNDAxYzFhY2YzMWViOTdhYTg2
+NTMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--848cfcef79491bb479bd8934ecee5f9117e195db
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000233)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+Rendered flights/_new_seat (0.00310)
+Completed in 0.06034 (16 reqs/sec) | Rendering: 0.05473 (90%) | DB: 0.00023 (0%) | 200 OK [http://localhost/flights/1]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 17:41:58) [GET]
+  Session ID: 9fa9b657e55a59a4a4a2569b22bd70c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000239)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+Rendered flights/_new_seat (0.00179)
+Completed in 0.01272 (78 reqs/sec) | Rendering: 0.00707 (55%) | DB: 0.00024 (1%) | 200 OK [http://localhost/flights/1]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 17:49:58) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000231)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+
+
+ActionView::TemplateError (undefined local variable or method `“Create” ' for #<ActionView::Base:0x2435dd0>) on line #14 of flights/_new_seat.html.erb:
+11:     <%= f.text_field :baggage %>
+12:   </p>
+13:   <p>
+14:     <%= f.submit “Create” %>
+15:   </p>
+16: <% end %>
+
+    app/views/flights/_new_seat.html.erb:14:in `_run_erb_47app47views47flights47_new_seat46html46erb'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/helpers/form_helper.rb:317:in `fields_for'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/helpers/form_helper.rb:253:in `form_for'
+    app/views/flights/_new_seat.html.erb:2:in `_run_erb_47app47views47flights47_new_seat46html46erb'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `execute'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partial_template.rb:20:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:26:in `benchmark'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:26:in `benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partial_template.rb:19:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:22:in `render_template'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partials.rb:110:in `render_partial'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:277:in `render'
+    app/views/flights/show.html.erb:26:in `_run_erb_47app47views47flights47show46html46erb'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `execute'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:35:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:22:in `render_template'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:248:in `render_file'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1112:in `render_for_file'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:869:in `render_with_no_layout'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:884:in `render_with_no_layout'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/layout.rb:251:in `render_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:51:in `render'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:51:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:131:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:131:in `custom'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:160:in `call'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:160:in `respond'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:154:in `each'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:154:in `respond'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    app/controllers/flights_controller.rb:18:in `show'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:579:in `call_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/query_cache.rb:8:in `cache'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:76:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:74:in `synchronize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:74:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 17:51:18) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000233)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+Rendered flights/_new_seat (0.00188)
+Completed in 0.03174 (31 reqs/sec) | Rendering: 0.02612 (82%) | DB: 0.00023 (0%) | 200 OK [http://localhost/flights/1]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:04:51) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000233)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;35;1mSeat Load (0.000202)[0m   [0mSELECT * FROM "seats" [0m
+
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each) on line #10 of flights/_seat_list.html.erb:
+7:     <th>Baggage</th>
+8:   </tr>
+9: 
+10: <% for seat in @seats %>
+11:   <tr>
+12:     <td><%=h seat.name %></td>
+13:     <td><%=h seat.baggage %></td>
+
+    app/views/flights/_seat_list.html.erb:10:in `_run_erb_47app47views47flights47_seat_list46html46erb'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `execute'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partial_template.rb:20:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:26:in `benchmark'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:26:in `benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partial_template.rb:19:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:22:in `render_template'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/partials.rb:110:in `render_partial'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:277:in `render'
+    app/views/flights/show.html.erb:26:in `_run_erb_47app47views47flights47show46html46erb'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:342:in `execute'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:35:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/template.rb:22:in `render_template'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_view/base.rb:248:in `render_file'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1112:in `render_for_file'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:869:in `render_with_no_layout'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:884:in `render_with_no_layout'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/layout.rb:251:in `render_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:51:in `render'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:51:in `render'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:131:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:131:in `custom'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:160:in `call'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:160:in `respond'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:154:in `each'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:154:in `respond'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    app/controllers/flights_controller.rb:18:in `show'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:579:in `call_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/query_cache.rb:8:in `cache'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:76:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:74:in `synchronize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/rails.rb:74:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:06:35) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000232)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;35;1mSeat Load (0.000115)[0m   [0mSELECT * FROM "seats" [0m
+Rendered flights/_seat_list (0.00003)
+Rendered flights/_new_seat (0.00162)
+Completed in 0.03111 (32 reqs/sec) | Rendering: 0.02546 (81%) | DB: 0.00035 (1%) | 200 OK [http://localhost/flights/1]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:07:59) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000237)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;35;1mSeat Load (0.001616)[0m   [0mSELECT * FROM "seats" [0m
+Rendered flights/_seat_list (0.00519)
+Rendered flights/_new_seat (0.00075)
+Completed in 0.01914 (52 reqs/sec) | Rendering: 0.01169 (61%) | DB: 0.00185 (9%) | 200 OK [http://localhost/flights/1]
+
+
+Processing SeatsController#destroy (for 127.0.0.1 at 2008-11-29 18:08:14) [DELETE]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "_method"=>"delete", "action"=>"destroy", "id"=>"14", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.000219)[0m   [0;1mSELECT * FROM "seats" WHERE ("seats"."id" = 14) [0m
+  [4;35;1mSeat Destroy (0.000323)[0m   [0m DELETE FROM "seats"
+ WHERE "id" = 14
+[0m
+Redirected to http://localhost:3000/seats
+Completed in 0.01001 (99 reqs/sec) | DB: 0.00054 (5%) | 302 Found [http://localhost/seats/14]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:14) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.001826)[0m   [0;1mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01361 (73 reqs/sec) | Rendering: 0.00728 (53%) | DB: 0.00183 (13%) | 200 OK [http://localhost/seats]
+
+
+Processing SeatsController#destroy (for 127.0.0.1 at 2008-11-29 18:08:17) [DELETE]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "_method"=>"delete", "action"=>"destroy", "id"=>"15", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.000223)[0m   [0mSELECT * FROM "seats" WHERE ("seats"."id" = 15) [0m
+  [4;36;1mSeat Destroy (0.000262)[0m   [0;1m DELETE FROM "seats"
+ WHERE "id" = 15
+[0m
+Redirected to http://localhost:3000/seats
+Completed in 0.01002 (99 reqs/sec) | DB: 0.00049 (4%) | 302 Found [http://localhost/seats/15]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:17) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.001695)[0m   [0mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01184 (84 reqs/sec) | Rendering: 0.00563 (47%) | DB: 0.00169 (14%) | 200 OK [http://localhost/seats]
+
+
+Processing SeatsController#destroy (for 127.0.0.1 at 2008-11-29 18:08:18) [DELETE]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "_method"=>"delete", "action"=>"destroy", "id"=>"16", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.000217)[0m   [0;1mSELECT * FROM "seats" WHERE ("seats"."id" = 16) [0m
+  [4;35;1mSeat Destroy (0.000290)[0m   [0m DELETE FROM "seats"
+ WHERE "id" = 16
+[0m
+Redirected to http://localhost:3000/seats
+Completed in 0.01111 (90 reqs/sec) | DB: 0.00051 (4%) | 302 Found [http://localhost/seats/16]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:18) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.001746)[0m   [0;1mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01207 (82 reqs/sec) | Rendering: 0.00572 (47%) | DB: 0.00175 (14%) | 200 OK [http://localhost/seats]
+
+
+Processing SeatsController#destroy (for 127.0.0.1 at 2008-11-29 18:08:19) [DELETE]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "_method"=>"delete", "action"=>"destroy", "id"=>"17", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.000218)[0m   [0mSELECT * FROM "seats" WHERE ("seats"."id" = 17) [0m
+  [4;36;1mSeat Destroy (0.000301)[0m   [0;1m DELETE FROM "seats"
+ WHERE "id" = 17
+[0m
+Redirected to http://localhost:3000/seats
+Completed in 0.01022 (97 reqs/sec) | DB: 0.00052 (5%) | 302 Found [http://localhost/seats/17]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:19) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.001560)[0m   [0mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01137 (87 reqs/sec) | Rendering: 0.00523 (46%) | DB: 0.00156 (13%) | 200 OK [http://localhost/seats]
+
+
+Processing SeatsController#destroy (for 127.0.0.1 at 2008-11-29 18:08:20) [DELETE]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "_method"=>"delete", "action"=>"destroy", "id"=>"18", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.000211)[0m   [0;1mSELECT * FROM "seats" WHERE ("seats"."id" = 18) [0m
+  [4;35;1mSeat Destroy (0.000243)[0m   [0m DELETE FROM "seats"
+ WHERE "id" = 18
+[0m
+Redirected to http://localhost:3000/seats
+Completed in 0.01011 (98 reqs/sec) | DB: 0.00045 (4%) | 302 Found [http://localhost/seats/18]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:20) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.001442)[0m   [0;1mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01085 (92 reqs/sec) | Rendering: 0.00501 (46%) | DB: 0.00144 (13%) | 200 OK [http://localhost/seats]
+
+
+Processing SeatsController#destroy (for 127.0.0.1 at 2008-11-29 18:08:21) [DELETE]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "_method"=>"delete", "action"=>"destroy", "id"=>"19", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.000214)[0m   [0mSELECT * FROM "seats" WHERE ("seats"."id" = 19) [0m
+  [4;36;1mSeat Destroy (0.000241)[0m   [0;1m DELETE FROM "seats"
+ WHERE "id" = 19
+[0m
+Redirected to http://localhost:3000/seats
+Completed in 0.01049 (95 reqs/sec) | DB: 0.00046 (4%) | 302 Found [http://localhost/seats/19]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:21) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.001485)[0m   [0mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00513 (46%) | DB: 0.00148 (13%) | 200 OK [http://localhost/seats]
+
+
+Processing SeatsController#destroy (for 127.0.0.1 at 2008-11-29 18:08:23) [DELETE]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "_method"=>"delete", "action"=>"destroy", "id"=>"20", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.000225)[0m   [0;1mSELECT * FROM "seats" WHERE ("seats"."id" = 20) [0m
+  [4;35;1mSeat Destroy (0.000247)[0m   [0m DELETE FROM "seats"
+ WHERE "id" = 20
+[0m
+Redirected to http://localhost:3000/seats
+Completed in 0.00990 (101 reqs/sec) | DB: 0.00047 (4%) | 302 Found [http://localhost/seats/20]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:23) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.001672)[0m   [0;1mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01089 (91 reqs/sec) | Rendering: 0.00476 (43%) | DB: 0.00167 (15%) | 200 OK [http://localhost/seats]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:26) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.001380)[0m   [0mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01052 (95 reqs/sec) | Rendering: 0.00469 (44%) | DB: 0.00138 (13%) | 200 OK [http://localhost/seats]
+
+
+Processing SeatsController#index (for 127.0.0.1 at 2008-11-29 18:08:27) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"index", "controller"=>"seats"}
+  [4;36;1mSeat Load (0.001290)[0m   [0;1mSELECT * FROM "seats" [0m
+Rendering template within layouts/seats
+Rendering seats/index
+Completed in 0.01022 (97 reqs/sec) | Rendering: 0.00454 (44%) | DB: 0.00129 (12%) | 200 OK [http://localhost/seats]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:08:28) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000237)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;36;1mSeat Load (0.001087)[0m   [0;1mSELECT * FROM "seats" [0m
+Rendered flights/_seat_list (0.00392)
+Rendered flights/_new_seat (0.00081)
+Completed in 0.01671 (59 reqs/sec) | Rendering: 0.01008 (60%) | DB: 0.00132 (7%) | 200 OK [http://localhost/flights/1]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:08:29) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000237)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;36;1mSeat Load (0.001111)[0m   [0;1mSELECT * FROM "seats" [0m
+Rendered flights/_seat_list (0.00383)
+Rendered flights/_new_seat (0.00081)
+Completed in 0.01659 (60 reqs/sec) | Rendering: 0.00999 (60%) | DB: 0.00135 (8%) | 200 OK [http://localhost/flights/1]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:11:45) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"2", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000237)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 2) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;36;1mSeat Load (0.001169)[0m   [0;1mSELECT * FROM "seats" [0m
+Rendered flights/_seat_list (0.00394)
+Rendered flights/_new_seat (0.00090)
+Completed in 0.01731 (57 reqs/sec) | Rendering: 0.01019 (58%) | DB: 0.00141 (8%) | 200 OK [http://localhost/flights/2]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:18:59) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000412)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;36;1mSeat Load (0.000880)[0m   [0;1mSELECT * FROM "seats" WHERE ("seats".flight_id = 1) [0m
+Rendered flights/_seat_list (0.00443)
+Rendered flights/_new_seat (0.00079)
+Completed in 0.12540 (7 reqs/sec) | Rendering: 0.08214 (65%) | DB: 0.00129 (1%) | 200 OK [http://localhost/flights/1]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:19:35) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"2", "controller"=>"flights"}
+  [4;35;1mFlight Load (0.000234)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 2) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;36;1mSeat Load (0.000594)[0m   [0;1mSELECT * FROM "seats" WHERE ("seats".flight_id = 2) [0m
+Rendered flights/_seat_list (0.00345)
+Rendered flights/_new_seat (0.00076)
+Completed in 0.01467 (68 reqs/sec) | Rendering: 0.00806 (54%) | DB: 0.00083 (5%) | 200 OK [http://localhost/flights/2]
+
+
+Processing SeatsController#create (for 127.0.0.1 at 2008-11-29 18:30:46) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "action"=>"create", "seat"=>{"name"=>"Sam Seaborn", "flight_id"=>"2", "baggage"=>"110"}, "controller"=>"seats"}
+
+
+SyntaxError (/Users/davidg/data/writing/books/hfror/pages/tech_review/code/chap6/coconut/app/models/seat.rb:5: syntax error, unexpected kEND, expecting ')'):
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:216:in `load_without_new_constant_marking'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:216:in `load_file'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:215:in `load_file'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:96:in `require_or_load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:261:in `load_missing_constant'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:468:in `const_missing'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:480:in `const_missing'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:273:in `load_missing_constant'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:484:in `const_missing'
+    /app/controllers/seats_controller.rb:43:in `create'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:579:in `call_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.1.2/lib/active_record/query_cache.rb:8:in `cache'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing SeatsController#create (for 127.0.0.1 at 2008-11-29 18:31:02) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "action"=>"create", "seat"=>{"name"=>"Sam Seaborn", "flight_id"=>"2", "baggage"=>"110"}, "controller"=>"seats"}
+  [4;35;1mFlight Load (0.000253)[0m   [0mSELECT * FROM "flights" WHERE ("flights"."id" = 2) [0m
+Rendering template within layouts/seats
+Rendering seats/new
+Completed in 0.01349 (74 reqs/sec) | Rendering: 0.00260 (19%) | DB: 0.00025 (1%) | 200 OK [http://localhost/seats]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2008-11-29 18:35:25) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlOGI1OTg4OGUzN2ZhNDAxYzFhY2YzMWViOTdhYTg2
+NTMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--848cfcef79491bb479bd8934ecee5f9117e195db
+  Parameters: {}
+
+
+ActionController::RoutingError (No route matches "/incidents/news.xml" with {:method=>:get}):
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/routing/recognition_optimisation.rb:67:in `recognize_path'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/routing/route_set.rb:385:in `recognize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:148:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /Library/Ruby/Gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (not_found)
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:38:02) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"3", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000242)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 3) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;35;1mSeat Load (0.000263)[0m   [0mSELECT * FROM "seats" WHERE ("seats".flight_id = 3) [0m
+Rendered flights/_seat_list (0.00063)
+Rendered flights/_new_seat (0.00172)
+Completed in 0.03147 (31 reqs/sec) | Rendering: 0.02493 (79%) | DB: 0.00050 (1%) | 200 OK [http://localhost/flights/3]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:38:05) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000238)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;35;1mSeat Load (0.000845)[0m   [0mSELECT * FROM "seats" WHERE ("seats".flight_id = 1) [0m
+Rendered flights/_seat_list (0.00455)
+Rendered flights/_new_seat (0.00077)
+Completed in 0.01630 (61 reqs/sec) | Rendering: 0.00942 (57%) | DB: 0.00108 (6%) | 200 OK [http://localhost/flights/1]
+
+
+Processing SeatsController#create (for 127.0.0.1 at 2008-11-29 18:38:55) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "action"=>"create", "seat"=>{"name"=>"Tom Halpin", "flight_id"=>"1", "baggage"=>"15"}, "controller"=>"seats"}
+  [4;36;1mFlight Load (0.000244)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+  [4;35;1mSQL (0.000129)[0m   [0mSELECT count(*) AS count_all FROM "seats" WHERE ("seats".flight_id = 1) [0m
+  [4;36;1mSeat Create (0.000293)[0m   [0;1mINSERT INTO "seats" ("name", "updated_at", "flight_id", "baggage", "created_at") VALUES('Tom Halpin', '2008-11-29 18:38:55', 1, 15.0, '2008-11-29 18:38:55')[0m
+Redirected to http://localhost:3000/seats/21
+Completed in 0.01784 (56 reqs/sec) | DB: 0.00067 (3%) | 302 Found [http://localhost/seats]
+
+
+Processing SeatsController#show (for 127.0.0.1 at 2008-11-29 18:38:55) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIiNTZWF0IHdhcyBzdWNjZXNzZnVsbHkgY3JlYXRlZC4G
+OgpAdXNlZHsGOwdG--cb2a7d14d1c4b4440fb2b56ccb6e42c3bb10a75b
+  Parameters: {"action"=>"show", "id"=>"21", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.000217)[0m   [0mSELECT * FROM "seats" WHERE ("seats"."id" = 21) [0m
+Rendering template within layouts/seats
+Rendering seats/show
+Completed in 0.00790 (126 reqs/sec) | Rendering: 0.00218 (27%) | DB: 0.00022 (2%) | 200 OK [http://localhost/seats/21]
+
+
+Processing SeatsController#create (for 127.0.0.1 at 2008-11-29 18:39:06) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIiNTZWF0IHdhcyBzdWNjZXNzZnVsbHkgY3JlYXRlZC4G
+OgpAdXNlZHsGOwdU--4141e0057a63b6cd3080ca9f32f75cda4385dfa7
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "action"=>"create", "seat"=>{"name"=>"Jack Hampson", "flight_id"=>"1", "baggage"=>"18"}, "controller"=>"seats"}
+  [4;36;1mFlight Load (0.000233)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+  [4;35;1mSQL (0.000127)[0m   [0mSELECT count(*) AS count_all FROM "seats" WHERE ("seats".flight_id = 1) [0m
+  [4;36;1mSeat Create (0.000326)[0m   [0;1mINSERT INTO "seats" ("name", "updated_at", "flight_id", "baggage", "created_at") VALUES('Jack Hampson', '2008-11-29 18:39:06', 1, 18.0, '2008-11-29 18:39:06')[0m
+Redirected to http://localhost:3000/seats/22
+Completed in 0.01794 (55 reqs/sec) | DB: 0.00069 (3%) | 302 Found [http://localhost/seats]
+
+
+Processing SeatsController#show (for 127.0.0.1 at 2008-11-29 18:39:06) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIiNTZWF0IHdhcyBzdWNjZXNzZnVsbHkgY3JlYXRlZC4G
+OgpAdXNlZHsGOwdG--cb2a7d14d1c4b4440fb2b56ccb6e42c3bb10a75b
+  Parameters: {"action"=>"show", "id"=>"22", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.000212)[0m   [0mSELECT * FROM "seats" WHERE ("seats"."id" = 22) [0m
+Rendering template within layouts/seats
+Rendering seats/show
+Completed in 0.00694 (144 reqs/sec) | Rendering: 0.00144 (20%) | DB: 0.00021 (3%) | 200 OK [http://localhost/seats/22]
+
+
+Processing SeatsController#create (for 127.0.0.1 at 2008-11-29 18:39:17) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIiNTZWF0IHdhcyBzdWNjZXNzZnVsbHkgY3JlYXRlZC4G
+OgpAdXNlZHsGOwdU--4141e0057a63b6cd3080ca9f32f75cda4385dfa7
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "action"=>"create", "seat"=>{"name"=>"Stew Harris", "flight_id"=>"1", "baggage"=>"17"}, "controller"=>"seats"}
+  [4;36;1mFlight Load (0.000264)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+  [4;35;1mSQL (0.000130)[0m   [0mSELECT count(*) AS count_all FROM "seats" WHERE ("seats".flight_id = 1) [0m
+  [4;36;1mSeat Create (0.000285)[0m   [0;1mINSERT INTO "seats" ("name", "updated_at", "flight_id", "baggage", "created_at") VALUES('Stew Harris', '2008-11-29 18:39:17', 1, 17.0, '2008-11-29 18:39:17')[0m
+Redirected to http://localhost:3000/seats/23
+Completed in 0.07765 (12 reqs/sec) | DB: 0.00068 (0%) | 302 Found [http://localhost/seats]
+
+
+Processing SeatsController#show (for 127.0.0.1 at 2008-11-29 18:39:17) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIiNTZWF0IHdhcyBzdWNjZXNzZnVsbHkgY3JlYXRlZC4G
+OgpAdXNlZHsGOwdG--cb2a7d14d1c4b4440fb2b56ccb6e42c3bb10a75b
+  Parameters: {"action"=>"show", "id"=>"23", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.000218)[0m   [0mSELECT * FROM "seats" WHERE ("seats"."id" = 23) [0m
+Rendering template within layouts/seats
+Rendering seats/show
+Completed in 0.00754 (132 reqs/sec) | Rendering: 0.00170 (22%) | DB: 0.00022 (2%) | 200 OK [http://localhost/seats/23]
+
+
+Processing SeatsController#create (for 127.0.0.1 at 2008-11-29 18:39:25) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIiNTZWF0IHdhcyBzdWNjZXNzZnVsbHkgY3JlYXRlZC4G
+OgpAdXNlZHsGOwdU--4141e0057a63b6cd3080ca9f32f75cda4385dfa7
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "action"=>"create", "seat"=>{"name"=>"Alex Hunt", "flight_id"=>"1", "baggage"=>"19"}, "controller"=>"seats"}
+  [4;36;1mFlight Load (0.000232)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+  [4;35;1mSQL (0.000128)[0m   [0mSELECT count(*) AS count_all FROM "seats" WHERE ("seats".flight_id = 1) [0m
+  [4;36;1mSeat Create (0.000306)[0m   [0;1mINSERT INTO "seats" ("name", "updated_at", "flight_id", "baggage", "created_at") VALUES('Alex Hunt', '2008-11-29 18:39:25', 1, 19.0, '2008-11-29 18:39:25')[0m
+Redirected to http://localhost:3000/seats/24
+Completed in 0.01658 (60 reqs/sec) | DB: 0.00067 (4%) | 302 Found [http://localhost/seats]
+
+
+Processing SeatsController#show (for 127.0.0.1 at 2008-11-29 18:39:26) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIiNTZWF0IHdhcyBzdWNjZXNzZnVsbHkgY3JlYXRlZC4G
+OgpAdXNlZHsGOwdG--cb2a7d14d1c4b4440fb2b56ccb6e42c3bb10a75b
+  Parameters: {"action"=>"show", "id"=>"24", "controller"=>"seats"}
+  [4;35;1mSeat Load (0.000216)[0m   [0mSELECT * FROM "seats" WHERE ("seats"."id" = 24) [0m
+Rendering template within layouts/seats
+Rendering seats/show
+Completed in 0.00751 (133 reqs/sec) | Rendering: 0.00196 (26%) | DB: 0.00022 (2%) | 200 OK [http://localhost/seats/24]
+
+
+Processing FlightsController#show (for 127.0.0.1 at 2008-11-29 18:39:28) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIiNTZWF0IHdhcyBzdWNjZXNzZnVsbHkgY3JlYXRlZC4G
+OgpAdXNlZHsGOwdU--4141e0057a63b6cd3080ca9f32f75cda4385dfa7
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"flights"}
+  [4;36;1mFlight Load (0.000247)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+Rendering template within layouts/flights
+Rendering flights/show
+  [4;35;1mSeat Load (0.001070)[0m   [0mSELECT * FROM "seats" WHERE ("seats".flight_id = 1) [0m
+Rendered flights/_seat_list (0.00548)
+Rendered flights/_new_seat (0.00081)
+Completed in 0.01702 (58 reqs/sec) | Rendering: 0.01000 (58%) | DB: 0.00132 (7%) | 200 OK [http://localhost/flights/1]
+
+
+Processing SeatsController#create (for 127.0.0.1 at 2008-11-29 18:39:47) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNGE2MjQzZTk3NGQ0ZDBjNDkzZTRjYTE0NjJhOWE4
+NTQiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--c44b83dae7c1d4af7a240cc189af25ab40f373c5
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9d58757f1176fab40d6f38a6ec35a6265cc48e94", "action"=>"create", "seat"=>{"name"=>"Conor Hynes", "flight_id"=>"1", "baggage"=>"19"}, "controller"=>"seats"}
+  [4;36;1mFlight Load (0.000238)[0m   [0;1mSELECT * FROM "flights" WHERE ("flights"."id" = 1) [0m
+  [4;35;1mSQL (0.000147)[0m   [0mSELECT count(*) AS count_all FROM "seats" WHERE ("seats".flight_id = 1) [0m
+Rendering template within layouts/seats
+Rendering seats/new
+Completed in 0.01440 (69 reqs/sec) | Rendering: 0.00170 (11%) | DB: 0.00038 (2%) | 200 OK [http://localhost/seats]
